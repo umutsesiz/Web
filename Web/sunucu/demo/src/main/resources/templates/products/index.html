@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo Proje</title>
+<link rel="stylesheet" href="../../main.css">
+</head>
+<body>
+
+<div class="container2">
+    <div class="top-menu">
+        <ul>
+            <li><a href="/">Anasayfa</a></li>
+            <li><a href="#">Hakkımızda</a></li>
+            <li><a href="#">İletişim</a></li>
+        </ul>
+            <form action="/search" method="GET">
+                <input type="text" name="keyword" placeholder="Ürün adı girin">
+                <button type="submit">Ara</button>
+            </form>
+    </div>
+
+    <div class="side-menu">
+        <ul>
+            <li th:each="category : ${category}">
+                <a th:href="@{'/category/' + ${category.id} + '/products'}">
+                    <span th:text="${category.kategoriAdi}"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <h1>Hoş Geldiniz!</h1>
+        <p>En yeni ürünlerimizi keşfedin.</p>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Ürün adı</th>
+                    <th>Açıklama</th>
+                    <th>Fiyat</th>
+                    <th style="text-align:center;">Görsel</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.urun_adi}"></td>
+                    <td th:text="${product.urun_aciklama}"></td>
+                    <td th:text="@{${product.fiyat} + ' TL'}"></td>
+                    <td><img th:src="@{'../../' + ${product.urun_image}}" width=100px></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
